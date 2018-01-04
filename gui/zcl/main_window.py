@@ -62,7 +62,7 @@ from qrcodewidget import QRCodeWidget, QRDialog
 from qrtextedit import ShowQRTextEdit
 from transaction_dialog import show_transaction
 from fee_slider import FeeSlider
-from zcltabwidget import VtcTabWidget
+from zcltabwidget import ZclTabWidget
 
 
 from electrum_zcl import ELECTRUM_VERSION
@@ -125,7 +125,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
 
         self.completions = QStringListModel()
 
-        self.tabs = tabs = VtcTabWidget(self)
+        self.tabs = tabs = ZclTabWidget(self)
         self.send_tab = self.create_send_tab()
         self.receive_tab = self.create_receive_tab()
         self.addresses_tab = self.create_addresses_tab()
@@ -360,7 +360,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
             self.setGeometry(100, 100, 840, 640)
 
     def watching_only_changed(self):
-        title = 'Electrum-VTC %s  -  %s' % (self.wallet.electrum_version,
+        title = 'Electrum-ZCL %s  -  %s' % (self.wallet.electrum_version,
                                             self.wallet.basename().decode('utf8'))
         extra = [self.wallet.storage.get('wallet_type', '?')]
         if self.wallet.is_watching_only():
@@ -624,9 +624,9 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         if self.decimal_point == 2:
             return 'bits'
         if self.decimal_point == 5:
-            return 'mVTC'
+            return 'mZCL'
         if self.decimal_point == 8:
-            return 'VTC'
+            return 'ZCL'
         raise Exception('Unknown base unit')
 
     def connect_fields(self, window, btc_e, fiat_e, fee_e):
@@ -2516,9 +2516,9 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         SSL_id_e.setReadOnly(True)
         id_widgets.append((SSL_id_label, SSL_id_e))
 
-        units = ['VTC', 'mVTC', 'bits']
+        units = ['ZCL', 'mZCL', 'bits']
         msg = _('Base unit of your wallet.')\
-              + '\n1VTC=1000mVTC.\n' \
+              + '\n1ZCL=1000mZCL.\n' \
               + _(' These settings affects the fields in the Send tab')+' '
         unit_label = HelpLabel(_('Base unit') + ':', msg)
         unit_combo = QComboBox()
@@ -2530,9 +2530,9 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
                 return
             edits = self.amount_e, self.fee_e, self.receive_amount_e
             amounts = [edit.get_amount() for edit in edits]
-            if unit_result == 'VTC':
+            if unit_result == 'ZCL':
                 self.decimal_point = 8
-            elif unit_result == 'mVTC':
+            elif unit_result == 'mZCL':
                 self.decimal_point = 5
             elif unit_result == 'bits':
                 self.decimal_point = 2

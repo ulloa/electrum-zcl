@@ -2,9 +2,9 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 
-class VtcTabBar(QTabBar):
+class ZclTabBar(QTabBar):
     def __init__(self, parent=None):
-        super(VtcTabBar, self).__init__(parent)
+        super(ZclTabBar, self).__init__(parent)
         self.tabSize = QSize(120, 120)
 
         self.borderColor = QColor(165, 162, 170)

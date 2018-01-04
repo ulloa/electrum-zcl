@@ -355,7 +355,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
             self.setGeometry(100, 100, 840, 400)
 
     def watching_only_changed(self):
-        title = 'Electrum-VTC %s  -  %s' % (self.wallet.electrum_version,
+        title = 'Electrum-ZCL %s  -  %s' % (self.wallet.electrum_version,
                                             self.wallet.basename().decode('utf8'))
         extra = [self.wallet.storage.get('wallet_type', '?')]
         if self.wallet.is_watching_only():
@@ -527,9 +527,9 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
             self.show_error(_('No donation address for this server'))
 
     def show_about(self):
-        QMessageBox.about(self, "Electrum-VTC",
+        QMessageBox.about(self, "Electrum-ZCL",
             _("Version")+" %s" % (self.wallet.electrum_version) + "\n\n" + 
-                _("Electrum's focus is speed, with low resource usage and simplifying Vertcoin. You do not need to perform regular backups, because your wallet can be recovered from a secret phrase that you can memorize or write on paper. Startup times are instant because it operates in conjunction with high-performance servers that handle the most complicated parts of the Vertcoin system."))
+                _("Electrum's focus is speed, with low resource usage and simplifying Zclassic. You do not need to perform regular backups, because your wallet can be recovered from a secret phrase that you can memorize or write on paper. Startup times are instant because it operates in conjunction with high-performance servers that handle the most complicated parts of the Zclassic system."))
 
     def show_report_bug(self):
         msg = ' '.join([
@@ -538,7 +538,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
             _("Before reporting a bug, upgrade to the most recent version of Electrum (latest release or git HEAD), and include the version number in your report."),
             _("Try to explain not only what the bug is, but how it occurs.")
          ])
-        self.show_message(msg, title="Electrum-VTC - " + _("Reporting Bugs"))
+        self.show_message(msg, title="Electrum-ZCL - " + _("Reporting Bugs"))
 
     def notify_transactions(self):
         if not self.network or not self.network.is_connected():
@@ -566,7 +566,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
 
     def notify(self, message):
         if self.tray:
-            self.tray.showMessage("Electrum-VTC", message, QSystemTrayIcon.Information, 20000)
+            self.tray.showMessage("Electrum-ZCL", message, QSystemTrayIcon.Information, 20000)
 
 
 
@@ -619,9 +619,9 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         if self.decimal_point == 2:
             return 'bits'
         if self.decimal_point == 5:
-            return 'mVTC'
+            return 'mZCL'
         if self.decimal_point == 8:
-            return 'VTC'
+            return 'ZCL'
         raise Exception('Unknown base unit')
 
     def connect_fields(self, window, btc_e, fiat_e, fee_e):
@@ -745,7 +745,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         self.receive_address_e = ButtonsLineEdit()
         self.receive_address_e.addCopyButton(self.app)
         self.receive_address_e.setReadOnly(True)
-        msg = _('Vertcoin address where the payment should be received. Note that each payment request uses a different Vertcoin address.')
+        msg = _('Zclassic address where the payment should be received. Note that each payment request uses a different Zclassic address.')
         self.receive_address_label = HelpLabel(_('Receiving address'), msg)
         self.receive_address_e.textChanged.connect(self.update_receive_qr)
         self.receive_address_e.setFocusPolicy(Qt.NoFocus)
@@ -775,8 +775,8 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         msg = ' '.join([
             _('Expiration date of your request.'),
             _('This information is seen by the recipient if you send them a signed payment request.'),
-            _('Expired requests have to be deleted manually from your list, in order to free the corresponding Vertcoin addresses.'),
-            _('The Vertcoin address never expires and will always be part of this Electrum wallet.'),
+            _('Expired requests have to be deleted manually from your list, in order to free the corresponding Zclassic addresses.'),
+            _('The Zclassic address never expires and will always be part of this Electrum wallet.'),
         ])
         grid.addWidget(HelpLabel(_('Request expires'), msg), 3, 0)
         grid.addWidget(self.expires_combo, 3, 1)
@@ -994,7 +994,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         self.amount_e = BTCAmountEdit(self.get_decimal_point)
         self.payto_e = PayToEdit(self)
         msg = _('Recipient of the funds.') + '\n\n'\
-              + _('You may enter a Vertcoin address, a label from your list of contacts (a list of completions will be proposed), or an alias (email-like address that forwards to a Vertcoin address)')
+              + _('You may enter a Zclassic address, a label from your list of contacts (a list of completions will be proposed), or an alias (email-like address that forwards to a Zclassic address)')
         payto_label = HelpLabel(_('Pay to'), msg)
         grid.addWidget(payto_label, 1, 0)
         grid.addWidget(self.payto_e, 1, 1, 1, -1)
@@ -1041,7 +1041,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         hbox.addStretch(1)
         grid.addLayout(hbox, 4, 4)
 
-        msg = _('Vertcoin transactions are in general not free. A transaction fee is paid by the sender of the funds.') + '\n\n'\
+        msg = _('Zclassic transactions are in general not free. A transaction fee is paid by the sender of the funds.') + '\n\n'\
               + _('The amount of fee can be decided freely by the sender. However, transactions with low fees take more time to be processed.') + '\n\n'\
               + _('A suggested fee is automatically added to this field. You may override it. The suggested fee increases with the size of the transaction.')
         self.fee_e_label = HelpLabel(_('Fee'), msg)
@@ -1299,10 +1299,10 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
 
         for _type, addr, amount in outputs:
             if addr is None:
-                self.show_error(_('Vertcoin Address is None'))
+                self.show_error(_('Zclassic Address is None'))
                 return
             if _type == TYPE_ADDRESS and not bitcoin.is_address(addr):
-                self.show_error(_('Invalid Vertcoin Address'))
+                self.show_error(_('Invalid Zclassic Address'))
                 return
             if amount is None:
                 self.show_error(_('Invalid Amount'))
@@ -1509,7 +1509,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         try:
             out = util.parse_URI(unicode(URI), self.on_pr)
         except BaseException as e:
-            self.show_error(_('Invalid Vertcoin URI:') + '\n' + str(e))
+            self.show_error(_('Invalid Zclassic URI:') + '\n' + str(e))
             return
         self.show_send_tab()
         r = out.get('r')
@@ -1886,7 +1886,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         address  = str(address.text()).strip()
         message = unicode(message.toPlainText()).encode('utf-8').strip()
         if not bitcoin.is_address(address):
-            self.show_message('Invalid Vertcoin address.')
+            self.show_message('Invalid Zclassic address.')
             return
         if not bitcoin.is_p2pkh(address):
             self.show_message('Cannot sign messages with this type of address.' + '\n\n' + self.msg_sign)
@@ -1903,7 +1903,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         address  = str(address.text()).strip()
         message = unicode(message.toPlainText()).encode('utf-8').strip()
         if not bitcoin.is_address(address):
-            self.show_message('Invalid Vertcoin address.')
+            self.show_message('Invalid Zclassic address.')
             return
         if not bitcoin.is_p2pkh(address):
             self.show_message('Cannot verify messages with this type of address.' + '\n\n' + self.msg_sign)
@@ -2041,7 +2041,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         if not data:
             return
         # if the user scanned a bitcoin URI
-        if data.startswith("Vertcoin:"):
+        if data.startswith("zclassic:"):
             self.pay_to_URI(data)
             return
         # else if the user scanned an offline signed tx
@@ -2509,9 +2509,9 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         SSL_id_e.setReadOnly(True)
         id_widgets.append((SSL_id_label, SSL_id_e))
 
-        units = ['VTC', 'mVTC', 'bits']
+        units = ['ZCL', 'mZCL', 'bits']
         msg = _('Base unit of your wallet.')\
-              + '\n1VTC=1000mVTC.\n' \
+              + '\n1ZCL=1000mZCL.\n' \
               + _(' These settings affects the fields in the Send tab')+' '
         unit_label = HelpLabel(_('Base unit') + ':', msg)
         unit_combo = QComboBox()
@@ -2523,9 +2523,9 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
                 return
             edits = self.amount_e, self.fee_e, self.receive_amount_e
             amounts = [edit.get_amount() for edit in edits]
-            if unit_result == 'VTC':
+            if unit_result == 'ZCL':
                 self.decimal_point = 8
-            elif unit_result == 'mVTC':
+            elif unit_result == 'mZCL':
                 self.decimal_point = 5
             elif unit_result == 'bits':
                 self.decimal_point = 2

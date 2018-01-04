@@ -22,7 +22,7 @@ class GoBack(Exception):
 
 MSG_GENERATING_WAIT = _("Electrum is generating your addresses, please wait...")
 MSG_ENTER_ANYTHING = _("Please enter a seed phrase, a master key, a list of "
-                       "Vertcoin addresses, or a list of private keys")
+                       "Zclassic addresses, or a list of private keys")
 MSG_ENTER_SEED_OR_MPK = _("Please enter a seed phrase or a master key (xpub or xprv):")
 MSG_COSIGNER = _("Please enter the master public key of cosigner #%d:")
 MSG_ENTER_PASSWORD = _("Choose a password to encrypt your wallet keys.") + '\n'\
@@ -98,7 +98,7 @@ class InstallWizard(QDialog, MessageBoxMixin, BaseWizard):
     def __init__(self, config, app, plugins, storage):
         BaseWizard.__init__(self, config, storage)
         QDialog.__init__(self, None)
-        self.setWindowTitle('Electrum-VTC  -  ' + _('Install Wizard'))
+        self.setWindowTitle('Electrum-ZCL  -  ' + _('Install Wizard'))
         self.app = app
         self.config = config
         # Set for base base class
@@ -165,7 +165,7 @@ class InstallWizard(QDialog, MessageBoxMixin, BaseWizard):
         hbox2.addWidget(self.pw_e)
         hbox2.addStretch()
         vbox.addLayout(hbox2)
-        self.set_layout(vbox, title=_('Electrum-VTC wallet'))
+        self.set_layout(vbox, title=_('Electrum-ZCL wallet'))
 
         wallet_folder = os.path.dirname(self.storage.path)
 
@@ -484,7 +484,7 @@ class InstallWizard(QDialog, MessageBoxMixin, BaseWizard):
     def init_network(self, network):
         message = _("Electrum communicates with remote servers to get "
                   "information about your transactions and addresses. The "
-                  "servers all fulfil the same purpose only differing in "
+                  "servers all fulfill the same purpose only differing in "
                   "hardware. In most cases you simply want to let Electrum "
                   "pick one at random.  However if you prefer feel free to "
                   "select a server manually.")
