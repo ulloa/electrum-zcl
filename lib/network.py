@@ -50,6 +50,7 @@ DEFAULT_PORTS = {'t':'55001', 's':'55002'}
 #move ~3/4 to e-x by 1.4.17
 #then gradually switch remaining nodes to e-x nodes
 
+#TODO ZCL these
 DEFAULT_SERVERS = {
     'fr1.vtconline.org': DEFAULT_PORTS,
     'uk1.vtconline.org': DEFAULT_PORTS,

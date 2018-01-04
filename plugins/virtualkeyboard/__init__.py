@@ -1,5 +1,5 @@
-from electrum_vtc.i18n import _
+from electrum_zcl.i18n import _
 
 fullname = 'Virtual Keyboard'
 description = '%s\n%s' % (_("Add an optional virtual keyboard to the password dialog."), _("Warning: do not use this if it makes you pick a weaker password."))
-available_for = ['qt', 'vtc']
+available_for = ['qt', 'zcl']

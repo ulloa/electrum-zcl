@@ -25,7 +25,7 @@
 
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
-from electrum_vtc.i18n import _
+from electrum_zcl.i18n import _
 
 from util import *
 from qrtextedit import ShowQRTextEdit, ScanQRTextEdit
@@ -139,7 +139,7 @@ class SeedLayout(QVBoxLayout):
         return ' '.join(text.split())
 
     def on_edit(self):
-        from electrum_vtc.bitcoin import seed_type
+        from electrum_zcl.bitcoin import seed_type
         s = self.get_seed()
         b = self.is_seed(s)
         if not self.is_bip39:
@@ -176,7 +176,7 @@ class KeysLayout(QVBoxLayout):
 class SeedDialog(WindowModalDialog):
 
     def __init__(self, parent, seed, passphrase):
-        WindowModalDialog.__init__(self, parent, ('Electrum-VTC - ' + _('Seed')))
+        WindowModalDialog.__init__(self, parent, ('Electrum-ZCL - ' + _('Seed')))
         self.setMinimumWidth(400)
         vbox = QVBoxLayout(self)
         title =  _("Your wallet generation seed is:")

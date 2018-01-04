@@ -9,12 +9,12 @@ else:
     raise BaseException('no name')
 
 
-home = 'C:\\electrum-vtc\\'
+home = 'C:\\electrum-zcl\\'
 
 # We don't put these files in to actually include them in the script but to make the Analysis method scan them for imports
-a = Analysis([home+'electrum-vtc',
+a = Analysis([home+'electrum-zcl',
               home+'gui/qt/main_window.py',
-              home+'gui/vtc/main_window.py',
+              home+'gui/zcl/main_window.py',
               home+'gui/text.py',
               home+'lib/util.py',
               home+'lib/wallet.py',
@@ -74,7 +74,7 @@ a.datas += extra_datas(home+'packages')
 
 # http://stackoverflow.com/questions/19055089/pyinstaller-onefile-warning-pyconfig-h-when-importing-scipy-or-scipy-signal
 for d in a.datas:
-    if 'pyconfig' in d[0]: 
+    if 'pyconfig' in d[0]:
         a.datas.remove(d)
         break
 
@@ -83,7 +83,7 @@ exe = EXE(pyz,
           a.scripts,
           a.binaries,
           a.datas,
-          name=os.path.join('build\\pyi.win32\\electrum-vtc', cmdline_name),
+          name=os.path.join('build\\pyi.win32\\electrum-zcl', cmdline_name),
           debug=False,
           strip=None,
           upx=False,
@@ -100,4 +100,4 @@ coll = COLLECT(exe,
                debug=False,
                icon=home+'icons/electrum.ico',
                console=False,
-               name=os.path.join('dist', 'electrum-vtc'))
+               name=os.path.join('dist', 'electrum-zcl'))

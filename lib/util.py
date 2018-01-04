@@ -214,7 +214,7 @@ def android_data_dir():
     return PythonActivity.mActivity.getFilesDir().getPath() + '/data'
 
 def android_headers_dir():
-    d = android_ext_dir() + '/org.electrum_vtc.electrum_vtc'
+    d = android_ext_dir() + '/org.electrum_zcl.electrum_zcl'
     if not os.path.exists(d):
         os.mkdir(d)
     return d
@@ -223,7 +223,7 @@ def android_check_data_dir():
     """ if needed, move old directory to sandbox """
     ext_dir = android_ext_dir()
     data_dir = android_data_dir()
-    old_electrum_dir = ext_dir + '/electrum-vtc'
+    old_electrum_dir = ext_dir + '/electrum-zcl'
     if not os.path.exists(data_dir) and os.path.exists(old_electrum_dir):
         import shutil
         new_headers_path = android_headers_dir() + '/blockchain_headers'
@@ -242,11 +242,11 @@ def user_dir():
     if 'ANDROID_DATA' in os.environ:
         return android_check_data_dir()
     elif os.name == 'posix':
-        return os.path.join(os.environ["HOME"], ".electrum-vtc")
+        return os.path.join(os.environ["HOME"], ".electrum-zcl")
     elif "APPDATA" in os.environ:
-        return os.path.join(os.environ["APPDATA"], "Electrum-VTC")
+        return os.path.join(os.environ["APPDATA"], "Electrum-ZCL")
     elif "LOCALAPPDATA" in os.environ:
-        return os.path.join(os.environ["LOCALAPPDATA"], "Electrum-VTC")
+        return os.path.join(os.environ["LOCALAPPDATA"], "Electrum-ZCL")
     else:
         #raise Exception("No home directory found in environment variables.")
         return
@@ -344,9 +344,9 @@ def time_difference(distance_in_time, include_seconds):
         return "over %d years" % (round(distance_in_minutes / 525600))
 
 mainnet_block_explorers = {
-    'bchain.info': ('https://bchain.info/VTC',
+    'bchain.info': ('https://bchain.info/ZCL',
                         {'tx': 'tx', 'addr': 'addr'}),
-    'explorer.vtconline.org': ('https://explorer.vtconline.org',
+    'explorer.zclassic.org': ('http://explorer.zclmine.pro',
                         {'tx': 'tx', 'addr': 'address'}),
 }
 
@@ -387,12 +387,12 @@ def parse_URI(uri, on_pr=None):
 
     if ':' not in uri:
         if not bitcoin.is_address(uri):
-            raise BaseException("Not a vertcoin address")
+            raise BaseException("Not a Zclassic address")
         return {'address': uri}
 
     u = urlparse.urlparse(uri)
-    if u.scheme != 'vertcoin':
-        raise BaseException("Not a vertcoin URI")
+    if u.scheme != 'zclassic':
+        raise BaseException("Not a Zclassic URI")
     address = u.path
 
     # python for android fails to parse query
@@ -409,7 +409,7 @@ def parse_URI(uri, on_pr=None):
     out = {k: v[0] for k, v in pq.items()}
     if address:
         if not bitcoin.is_address(address):
-            raise BaseException("Invalid vertcoin address:" + address)
+            raise BaseException("Invalid Zclassic address:" + address)
         out['address'] = address
     if 'amount' in out:
         am = out['amount']
@@ -460,7 +460,7 @@ def create_URI(addr, amount, message):
         if type(message) == unicode:
             message = message.encode('utf8')
         query.append('message=%s'%urllib.quote(message))
-    p = urlparse.ParseResult(scheme='vertcoin', netloc='', path=addr, params='', query='&'.join(query), fragment='')
+    p = urlparse.ParseResult(scheme='zclassic', netloc='', path=addr, params='', query='&'.join(query), fragment='')
     return urlparse.urlunparse(p)
 
 

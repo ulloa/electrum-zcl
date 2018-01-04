@@ -1199,7 +1199,7 @@ class Abstract_Wallet(PrintError):
         if not r:
             return
         out = copy.copy(r)
-        out['URI'] = 'vertcoin:' + addr + '?amount=' + util.format_satoshis(out.get('amount'))
+        out['URI'] = 'zclassic:' + addr + '?amount=' + util.format_satoshis(out.get('amount'))
         status, conf = self.get_request_status(addr)
         out['status'] = status
         if conf is not None:

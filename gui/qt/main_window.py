@@ -41,19 +41,19 @@ import PyQt4.QtCore as QtCore
 
 import icons_rc
 
-from electrum_vtc import keystore
-from electrum_vtc.bitcoin import COIN, is_valid, TYPE_ADDRESS
-from electrum_vtc.plugins import run_hook
-from electrum_vtc.i18n import _
-from electrum_vtc.util import (format_time, format_satoshis, PrintError,
+from electrum_zcl import keystore
+from electrum_zcl.bitcoin import COIN, is_valid, TYPE_ADDRESS
+from electrum_zcl.plugins import run_hook
+from electrum_zcl.i18n import _
+from electrum_zcl.util import (format_time, format_satoshis, PrintError,
                                format_satoshis_plain, NotEnoughFunds,
                                UserCancelled)
-from electrum_vtc import Transaction, mnemonic
-from electrum_vtc import util, bitcoin, commands, coinchooser
-from electrum_vtc import SimpleConfig, paymentrequest
-from electrum_vtc.wallet import Wallet, Multisig_Wallet
+from electrum_zcl import Transaction, mnemonic
+from electrum_zcl import util, bitcoin, commands, coinchooser
+from electrum_zcl import SimpleConfig, paymentrequest
+from electrum_zcl.wallet import Wallet, Multisig_Wallet
 try:
-    from electrum_vtc.plot import plot_history
+    from electrum_zcl.plot import plot_history
 except:
     plot_history = None
 
@@ -64,7 +64,7 @@ from transaction_dialog import show_transaction
 from fee_slider import FeeSlider
 
 
-from electrum_vtc import ELECTRUM_VERSION
+from electrum_zcl import ELECTRUM_VERSION
 import re
 
 from util import *
@@ -89,7 +89,7 @@ class StatusBarButton(QPushButton):
             self.func()
 
 
-from electrum_vtc.paymentrequest import PR_UNPAID, PR_PAID, PR_UNKNOWN, PR_EXPIRED
+from electrum_zcl.paymentrequest import PR_UNPAID, PR_PAID, PR_UNKNOWN, PR_EXPIRED
 
 
 class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
@@ -372,8 +372,8 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         if self.wallet.is_watching_only():
             msg = ' '.join([
                 _("This wallet is watching-only."),
-                _("This means you will not be able to spend vertcoins with it."),
-                _("Make sure you own the seed phrase or the private keys, before you request vertcoins to be sent to this wallet.")
+                _("This means you will not be able to spend Zclassic with it."),
+                _("Make sure you own the seed phrase or the private keys, before you request zclassics to be sent to this wallet.")
             ])
             self.show_warning(msg, title=_('Information'))
 
@@ -509,7 +509,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
 
         help_menu = menubar.addMenu(_("&Help"))
         help_menu.addAction(_("&About"), self.show_about)
-        help_menu.addAction(_("&Official website"), lambda: webbrowser.open("https://vertcoin.org"))
+        help_menu.addAction(_("&Official website"), lambda: webbrowser.open("https://zclassic.org"))
         help_menu.addSeparator()
         help_menu.addAction(_("&Documentation"), lambda: webbrowser.open("http://docs.electrum.org/")).setShortcut(QKeySequence.HelpContents)
         help_menu.addAction(_("&Report Bug"), self.show_report_bug)
@@ -522,7 +522,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         d = self.network.get_donation_address()
         if d:
             host = self.network.get_parameters()[0]
-            self.pay_to_URI('vertcoin:%s?message=donation for %s'%(d, host))
+            self.pay_to_URI('zclassic:%s?message=donation for %s'%(d, host))
         else:
             self.show_error(_('No donation address for this server'))
 
@@ -534,7 +534,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
     def show_report_bug(self):
         msg = ' '.join([
             _("Please report any bugs as issues on github:<br/>"),
-            "<a href=\"https://github.com/vertcoin/electrum-vtc/issues\">https://github.com/vertcoin/electrum-vtc/issues</a><br/><br/>",
+            "<a href=\"https://github.com/z-classic/electrum-zcl/issues\">https://github.com/z-classic/electrum-zcl/issues</a><br/><br/>",
             _("Before reporting a bug, upgrade to the most recent version of Electrum (latest release or git HEAD), and include the version number in your report."),
             _("Try to explain not only what the bug is, but how it occurs.")
          ])
@@ -913,7 +913,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
     def new_payment_request(self):
         addr = self.wallet.get_unused_address()
         if addr is None:
-            from electrum_vtc.wallet import Imported_Wallet
+            from electrum_zcl.wallet import Imported_Wallet
             if not self.wallet.is_deterministic():
                 msg = [
                     _('No more addresses in your wallet.'),
@@ -2022,7 +2022,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
 
 
     def tx_from_text(self, txt):
-        from electrum_vtc.transaction import tx_from_str, Transaction
+        from electrum_zcl.transaction import tx_from_str, Transaction
         try:
             tx = tx_from_str(txt)
             return Transaction(tx)
@@ -2032,7 +2032,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
             return
 
     def read_tx_from_qrcode(self):
-        from electrum_vtc import qrscanner
+        from electrum_zcl import qrscanner
         try:
             data = qrscanner.scan_barcode(self.config.get_video_device())
         except BaseException as e:
@@ -2081,7 +2081,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
             self.show_transaction(tx)
 
     def do_process_from_txid(self):
-        from electrum_vtc import transaction
+        from electrum_zcl import transaction
         txid, ok = QInputDialog.getText(self, _('Lookup transaction'), _('Transaction ID') + ':')
         if ok and txid:
             txid = str(txid).strip()
@@ -2112,7 +2112,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         e.setReadOnly(True)
         vbox.addWidget(e)
 
-        defaultname = 'electrum-vtc-private-keys.csv'
+        defaultname = 'electrum-zcl-private-keys.csv'
         select_msg = _('Select file to export your private keys to')
         hbox, filename_e, csv_button = filename_field(self, self.config, defaultname, select_msg)
         vbox.addLayout(hbox)
@@ -2196,7 +2196,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
     def do_export_labels(self):
         labels = self.wallet.labels
         try:
-            fileName = self.getSaveFileName(_("Select file to save your labels"), 'electrum-vtc_labels.json', "*.json")
+            fileName = self.getSaveFileName(_("Select file to save your labels"), 'electrum-zcl_labels.json', "*.json")
             if fileName:
                 with open(fileName, 'w+') as f:
                     json.dump(labels, f, indent=4, sort_keys=True)
@@ -2209,7 +2209,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         d = WindowModalDialog(self, _('Export History'))
         d.setMinimumSize(400, 200)
         vbox = QVBoxLayout(d)
-        defaultname = os.path.expanduser('~/electrum-vtc-history.csv')
+        defaultname = os.path.expanduser('~/electrum-zcl-history.csv')
         select_msg = _('Select file to export your wallet transactions to')
         hbox, filename_e, csv_button = filename_field(self, self.config, defaultname, select_msg)
         vbox.addLayout(hbox)
@@ -2380,7 +2380,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         lang_help = _('Select which language is used in the GUI (after restart).')
         lang_label = HelpLabel(_('Language') + ':', lang_help)
         lang_combo = QComboBox()
-        from electrum_vtc.i18n import languages
+        from electrum_zcl.i18n import languages
         lang_combo.addItems(languages.values())
         try:
             index = languages.keys().index(self.config.get("language",''))
@@ -2553,7 +2553,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         block_ex_combo.currentIndexChanged.connect(on_be)
         gui_widgets.append((block_ex_label, block_ex_combo))
 
-        from electrum_vtc import qrscanner
+        from electrum_zcl import qrscanner
         system_cameras = qrscanner._find_system_cameras()
         qr_combo = QComboBox()
         qr_combo.addItem("Default","default")

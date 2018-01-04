@@ -1,7 +1,7 @@
-from electrum_vtc.i18n import _
+from electrum_zcl.i18n import _
 
 fullname = 'Ledger Wallet'
 description = 'Provides support for Ledger hardware wallet'
 requires = [('btchip', 'github.com/ledgerhq/btchip-python')]
 registers_keystore = ('hardware', 'ledger', _("Ledger wallet"))
-available_for = ['qt', 'cmdline', 'vtc']
+available_for = ['qt', 'cmdline', 'zcl']

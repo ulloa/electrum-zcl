@@ -291,7 +291,7 @@ class Commands:
     @command('')
     def dumpprivkeys(self):
         """Deprecated."""
-        return "This command is deprecated. Use a pipe instead: 'electrum-vtc listaddresses | electrum-vtc getprivatekeys - '"
+        return "This command is deprecated. Use a pipe instead: 'electrum-zcl listaddresses | electrum-zcl getprivatekeys - '"
 
     @command('')
     def validateaddress(self, address):
@@ -751,10 +751,10 @@ config_variables = {
         'requests_dir': 'directory where a bip70 file will be written.',
         'ssl_privkey': 'Path to your SSL private key, needed to sign the request.',
         'ssl_chain': 'Chain of SSL certificates, needed for signed requests. Put your certificate at the top and the root CA at the end',
-        'url_rewrite': 'Parameters passed to str.replace(), in order to create the r= part of vertcoin: URIs. Example: \"(\'file:///var/www/\',\'https://electrum-ltc.org/\')\"',
+        'url_rewrite': 'Parameters passed to str.replace(), in order to create the r= part of zclassic: URIs. Example: \"(\'file:///var/www/\',\'https://electrum-ltc.org/\')\"',
     },
     'listrequests':{
-        'url_rewrite': 'Parameters passed to str.replace(), in order to create the r= part of vertcoin: URIs. Example: \"(\'file:///var/www/\',\'https://electrum-ltc.org/\')\"',
+        'url_rewrite': 'Parameters passed to str.replace(), in order to create the r= part of zclassic: URIs. Example: \"(\'file:///var/www/\',\'https://electrum-ltc.org/\')\"',
     }
 }
 
@@ -819,7 +819,7 @@ def add_global_options(parser):
     group = parser.add_argument_group('global options')
     group.add_argument("-v", "--verbose", action="store_true", dest="verbose", default=False, help="Show debugging information")
     group.add_argument("-D", "--dir", dest="electrum_path", help="electrum directory")
-    group.add_argument("-P", "--portable", action="store_true", dest="portable", default=False, help="Use local 'electrum-vtc_data' directory")
+    group.add_argument("-P", "--portable", action="store_true", dest="portable", default=False, help="Use local 'electrum-zcl_data' directory")
     group.add_argument("-w", "--wallet", dest="wallet_path", help="wallet path")
     group.add_argument("--testnet", action="store_true", dest="testnet", default=False, help="Use Testnet")
     group.add_argument("--segwit", action="store_true", dest="segwit", default=False, help="The Wizard will create Segwit seed phrases (Testnet only).")
@@ -828,13 +828,13 @@ def add_global_options(parser):
 def get_parser():
     # create main parser
     parser = argparse.ArgumentParser(
-        epilog="Run 'electrum-vtc help <command>' to see the help for a command")
+        epilog="Run 'electrum-zcl help <command>' to see the help for a command")
     add_global_options(parser)
     subparsers = parser.add_subparsers(dest='cmd', metavar='<command>')
     # gui
     parser_gui = subparsers.add_parser('gui', description="Run Electrum's Graphical User Interface.", help="Run GUI (default)")
-    parser_gui.add_argument("url", nargs='?', default=None, help="vertcoin URI (or bip70 file)")
-    parser_gui.add_argument("-g", "--gui", dest="gui", help="select graphical user interface", choices=['qt', 'kivy', 'text', 'stdio', 'vtc'])
+    parser_gui.add_argument("url", nargs='?', default=None, help="Zclassic URI (or bip70 file)")
+    parser_gui.add_argument("-g", "--gui", dest="gui", help="select graphical user interface", choices=['qt', 'kivy', 'text', 'stdio', 'zcl'])
     parser_gui.add_argument("-o", "--offline", action="store_true", dest="offline", default=False, help="Run offline")
     parser_gui.add_argument("-m", action="store_true", dest="hide_gui", default=False, help="hide GUI on startup")
     parser_gui.add_argument("-L", "--lang", dest="language", default=None, help="default language used in GUI")

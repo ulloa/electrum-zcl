@@ -3,9 +3,9 @@ import curses, datetime, locale
 from decimal import Decimal
 import getpass
 
-from electrum_vtc.util import format_satoshis, set_verbosity
-from electrum_vtc.bitcoin import is_valid, COIN, TYPE_ADDRESS
-from electrum_vtc import Wallet, WalletStorage
+from electrum_zcl.util import format_satoshis, set_verbosity
+from electrum_zcl.bitcoin import is_valid, COIN, TYPE_ADDRESS
+from electrum_zcl import Wallet, WalletStorage
 
 _ = lambda x:x
 

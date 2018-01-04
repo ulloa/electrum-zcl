@@ -1,4 +1,4 @@
-from electrum_vtc.i18n import _
+from electrum_zcl.i18n import _
 fullname = _('Cosigner Pool')
 description = ' '.join([
     _("This plugin facilitates the use of multi-signatures wallets."),
@@ -6,4 +6,4 @@ description = ' '.join([
     _("Transactions are encrypted and stored on a remote server.")
 ])
 #requires_wallet_type = ['2of2', '2of3']
-available_for = ['qt', 'vtc']
+available_for = ['qt', 'zcl']

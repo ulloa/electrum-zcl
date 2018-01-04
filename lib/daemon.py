@@ -244,7 +244,7 @@ class Daemon(DaemonThread):
             path = config.get_wallet_path()
             wallet = self.wallets.get(path)
             if wallet is None:
-                return {'error': 'Wallet not open. Use "electrum-vtc daemon load_wallet"'}
+                return {'error': 'Wallet not open. Use "electrum-zcl daemon load_wallet"'}
         else:
             wallet = None
         # arguments passed to function
@@ -275,9 +275,9 @@ class Daemon(DaemonThread):
         DaemonThread.stop(self)
 
     def init_gui(self, config, plugins):
-        gui_name = config.get('gui', 'vtc')
+        gui_name = config.get('gui', 'zcl')
         if gui_name in ['lite', 'classic']:
             gui_name = 'qt'
-        gui = __import__('electrum_vtc_gui.' + gui_name, fromlist=['electrum_vtc_gui'])
+        gui = __import__('electrum_zcl_gui.' + gui_name, fromlist=['electrum_zcl_gui'])
         self.gui = gui.ElectrumGui(config, self, plugins)
         self.gui.main()
