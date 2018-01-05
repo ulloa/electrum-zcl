@@ -999,7 +999,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         self.amount_e = BTCAmountEdit(self.get_decimal_point)
         self.payto_e = PayToEdit(self)
         msg = _('Recipient of the funds.') + '\n\n'\
-              + _('You may enter a Vertcoin address, a label from your list of contacts (a list of completions will be proposed), or an alias (email-like address that forwards to a Vertcoin address)')
+              + _('You may enter a Zclassic address, a label from your list of contacts (a list of completions will be proposed), or an alias (email-like address that forwards to a Zclassic address)')
         payto_label = HelpLabel(_('Pay to'), msg)
         grid.addWidget(payto_label, 1, 0)
         grid.addWidget(self.payto_e, 1, 1, 1, -1)
@@ -1046,7 +1046,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         hbox.addStretch(1)
         grid.addLayout(hbox, 4, 4)
 
-        msg = _('Vertcoin transactions are in general not free. A transaction fee is paid by the sender of the funds.') + '\n\n'\
+        msg = _('Zclassic transactions are in general not free. A transaction fee is paid by the sender of the funds.') + '\n\n'\
               + _('The amount of fee can be decided freely by the sender. However, transactions with low fees take more time to be processed.') + '\n\n'\
               + _('A suggested fee is automatically added to this field. You may override it. The suggested fee increases with the size of the transaction.')
         self.fee_e_label = HelpLabel(_('Fee'), msg)
@@ -1305,10 +1305,10 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
 
         for _type, addr, amount in outputs:
             if addr is None:
-                self.show_error(_('Vertcoin Address is None'))
+                self.show_error(_('Zclassic Address is None'))
                 return
             if _type == TYPE_ADDRESS and not bitcoin.is_address(addr):
-                self.show_error(_('Invalid Vertcoin Address'))
+                self.show_error(_('Invalid Zclassic Address'))
                 return
             if amount is None:
                 self.show_error(_('Invalid Amount'))
@@ -1515,7 +1515,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         try:
             out = util.parse_URI(unicode(URI), self.on_pr)
         except BaseException as e:
-            self.show_error(_('Invalid Vertcoin URI:') + '\n' + str(e))
+            self.show_error(_('Invalid Zclassic URI:') + '\n' + str(e))
             return
         self.show_send_tab()
         r = out.get('r')
@@ -1893,7 +1893,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         address  = str(address.text()).strip()
         message = unicode(message.toPlainText()).encode('utf-8').strip()
         if not bitcoin.is_address(address):
-            self.show_message('Invalid Vertcoin address.')
+            self.show_message('Invalid Zclassic address.')
             return
         if not bitcoin.is_p2pkh(address):
             self.show_message('Cannot sign messages with this type of address.' + '\n\n' + self.msg_sign)
@@ -1910,7 +1910,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         address  = str(address.text()).strip()
         message = unicode(message.toPlainText()).encode('utf-8').strip()
         if not bitcoin.is_address(address):
-            self.show_message('Invalid Vertcoin address.')
+            self.show_message('Invalid Zclassic address.')
             return
         if not bitcoin.is_p2pkh(address):
             self.show_message('Cannot verify messages with this type of address.' + '\n\n' + self.msg_sign)
@@ -2048,7 +2048,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         if not data:
             return
         # if the user scanned a bitcoin URI
-        if data.startswith("Vertcoin:"):
+        if data.startswith("zclassic:"):
             self.pay_to_URI(data)
             return
         # else if the user scanned an offline signed tx
