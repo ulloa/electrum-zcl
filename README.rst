@@ -9,8 +9,9 @@ Under Active Development - DO NOT RECEIVE MONEY. GEN'D ADDRESSES ARE STILL VTC.
   Original Author: Thomas Voegtlin
   Port Maintainer: Pooler (Electrum-LTC)
   Port Maintainer: Vertcoin (Electrum-VTC)
+  Port Maintainer: Zclassic (Zclassic -ZCL)
   Language: Python
-  Homepage: ####################
+  Homepage: # 
 
 
 
@@ -43,6 +44,8 @@ before you can run Electrum. Read the next section, "Development
 Version".
 
 
+
+
 On Mac
 ===============
 Install Homebrew ::
@@ -50,26 +53,59 @@ Install Homebrew ::
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)")
 
 
-Install Dependencies ::
+Install Dependencies, mainly PyQT4 ::
 
   brew install qt pyqt sip qscintilla2 
   brew install cartr/qt4/pyqt  
 
+  sudo apt-get install pyqt4-dev-tools
+
   mkdir -p ~/Library/Python/2.7/lib/python/site-packages
 
-  ARCHFLAGS="-arch i386 -arch x86_64"
+Check out the code from Github::
 
-  echo 'import site; site.addsitedir("/usr/local/lib/python2.7/site-packages")' >> ~/Library/Python/2.7/lib/python/site-packages/homebrew.pth
+  git clone https://github.com/BTCP-community/electrum-zcl.git
+  cd electrum-zcl
 
-  sudo pip2 install dnspython pyaes ecdsa requests six qrcode pbkdf2 google protobuf jsonrpclib PySocks vtc_scrypt blockchain
+Run install (this should install dependencies)::
 
-  sudo pip2 install https://github.com/metalicjames/lyra2re-hash-python/archive/master.zip
+  python setup.py install
 
-  pyrcc4 icons.qrc -o gui/zcl/icons_rc.py
-  pyrcc4 style.qrc -o gui/zcl/style_rc.py
+Compile the icons and style files for ZCL::
 
-  ./electrum-zcl
+    ARCHFLAGS="-arch i386 -arch x86_64"
 
+    echo 'import site; site.addsitedir("/usr/local/lib/python2.7/site-packages")' >> ~/Library/Python/2.7/lib/python/site-packages/homebrew.pth
+
+    sudo pip2 install dnspython pyaes ecdsa requests six qrcode pbkdf2 google protobuf jsonrpclib PySocks vtc_scrypt blockchain
+
+    sudo pip2 install https://github.com/metalicjames/lyra2re-hash-python/archive/master.zip
+
+    pyrcc4 icons.qrc -o gui/zcl/icons_rc.py
+    pyrcc4 style.qrc -o gui/zcl/style_rc.py
+
+And run:: 
+ 
+ ./electrum-zcl
+
+
+
+You can also try:::
+
+   On MacPorts installs: 
+    sudo python setup-release.py py2app
+
+Or::::
+
+   On Homebrew installs: 
+    ARCHFLAGS="-arch i386 -arch x86_64"
+    sudo python setup-release.py py2app --includes sip
+    
+    sudo hdiutil create -fs HFS+ -volname "Electrum-ZCL" -srcfolder dist/Electrum-ZCL.app dist/electrum-zcl-VERSION-macosx.dmg
+   
+
+
+old VTC instructions:
 
 Development version
 ===================
@@ -101,8 +137,6 @@ Create translations (optional)::
     ./contrib/make_locale
 
 
-
-
 Creating Binaries
 =================
 
@@ -118,7 +152,6 @@ which always installs everything unzipped.
 
 Mac OS X
 --------
-
 ::
 
     # On MacPorts installs: 
@@ -127,7 +160,7 @@ Mac OS X
     # On Homebrew installs: 
     ARCHFLAGS="-arch i386 -arch x86_64" sudo python setup-release.py py2app --includes sip
     
-    sudo hdiutil create -fs HFS+ -volname "Electrum-VTC" -srcfolder dist/Electrum-VTC.app dist/electrum-vtc-VERSION-macosx.dmg
+    sudo hdiutil create -fs HFS+ -volname "Electrum-ZCL" -srcfolder dist/Electrum-ZCL.app dist/electrum-zcl-VERSION-macosx.dmg
 
 Windows
 -------
