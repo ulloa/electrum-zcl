@@ -129,8 +129,8 @@ class Commands:
     @command('wn')
     def restore(self, text):
         """Restore a wallet from text. Text can be a seed phrase, a master
-        public key, a master private key, a list of Vertcoin addresses
-        or Vertcoin private keys. If you want to be prompted for your
+        public key, a master private key, a list of Zclassic addresses
+        or Zclassic private keys. If you want to be prompted for your
         seed, type '?' or ':' (concealed) """
         raise BaseException('Not a JSON-RPC command')
 
@@ -491,7 +491,7 @@ class Commands:
 
     @command('w')
     def setlabel(self, key, label):
-        """Assign a label to an item. Item may be a Vertcoin address or a
+        """Assign a label to an item. Item may be a Zclassic address or a
         transaction ID"""
         self.wallet.set_label(key, label)
 

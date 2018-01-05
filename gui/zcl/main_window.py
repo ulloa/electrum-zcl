@@ -750,7 +750,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         self.receive_address_e = ButtonsLineEdit()
         self.receive_address_e.addCopyButton(self.app)
         self.receive_address_e.setReadOnly(True)
-        msg = _('Vertcoin address where the payment should be received. Note that each payment request uses a different Vertcoin address.')
+        msg = _('Zclassic address where the payment should be received. Note that each payment request uses a different Zclassic address.')
         self.receive_address_label = HelpLabel(_('Receiving address'), msg)
         self.receive_address_e.textChanged.connect(self.update_receive_qr)
         self.receive_address_e.setFocusPolicy(Qt.NoFocus)
@@ -780,8 +780,8 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         msg = ' '.join([
             _('Expiration date of your request.'),
             _('This information is seen by the recipient if you send them a signed payment request.'),
-            _('Expired requests have to be deleted manually from your list, in order to free the corresponding Vertcoin addresses.'),
-            _('The Vertcoin address never expires and will always be part of this Electrum wallet.'),
+            _('Expired requests have to be deleted manually from your list, in order to free the corresponding Zclassic addresses.'),
+            _('The Zclassic address never expires and will always be part of this Electrum wallet.'),
         ])
         grid.addWidget(HelpLabel(_('Request expires'), msg), 3, 0)
         grid.addWidget(self.expires_combo, 3, 1)

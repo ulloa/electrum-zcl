@@ -164,7 +164,7 @@ class ElectrumGui:
 
     def do_send(self):
         if not is_valid(self.str_recipient):
-            print(_('Invalid Vertcoin address'))
+            print(_('Invalid Zclassic address'))
             return
         try:
             amount = int(Decimal(self.str_amount) * COIN)

@@ -53,7 +53,7 @@ import pyaes
 
 
 
-# zcl network constants
+# ZClassic network constants
 TESTNET = False
 NOLNET = False
 ADDRTYPE_P2PKH = 1CB8 #hex fixme

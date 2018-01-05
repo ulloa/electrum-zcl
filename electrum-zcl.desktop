@@ -2,16 +2,16 @@
 # sudo desktop-file-install electrum.desktop
 
 [Desktop Entry]
-Comment=Lightweight Vertcoin Client
-Exec=electrum-vtc %u
-GenericName[en_US]=Vertcoin Wallet
-GenericName=Vertcoin Wallet
+Comment=Lightweight Zclassic Client
+Exec=electrum-zcl %u
+GenericName[en_US]=Zclassic Wallet
+GenericName=Zclassic Wallet
 Icon=electrum-vtc
-Name[en_US]=Electrum Vertcoin Wallet
-Name=Electrum Vertcoin Wallet
+Name[en_US]=Electrum Zclassic Wallet
+Name=Electrum Zclassic Wallet
 Categories=Finance;Network;
 StartupNotify=false
 Terminal=false
 Type=Application
-MimeType=x-scheme-handler/vertcoin;
+MimeType=x-scheme-handler/zclassic;
 
