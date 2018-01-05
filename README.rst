@@ -43,9 +43,36 @@ before you can run Electrum. Read the next section, "Development
 Version".
 
 
+### On Mac:
+#### Install Homebrew:
+
+`/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)")`
+
+
+#### Install Dependencies:
+
+`brew install qt pyqt sip qscintilla2`  
+`brew install cartr/qt4/pyqt`  
+
+`mkdir -p ~/Library/Python/2.7/lib/python/site-packages`
+
+`ARCHFLAGS="-arch i386 -arch x86_64"`
+
+`echo 'import site; site.addsitedir("/usr/local/lib/python2.7/site-packages")' >> ~/Library/Python/2.7/lib/python/site-packages/homebrew.pth`
+
+`sudo pip2 install dnspython pyaes ecdsa requests six qrcode pbkdf2 google protobuf jsonrpclib PySocks vtc_scrypt blockchain`
+
+`sudo pip2 install https://github.com/metalicjames/lyra2re-hash-python/archive/master.zip`
+
+`pyrcc4 icons.qrc -o gui/vtc/icons_rc.py`
+`pyrcc4 style.qrc -o gui/vtc/style_rc.py`
+
+`./electrum-zcl`
+
 
 Development version
 ===================
+
 
 Check out the code from Github::
 
