@@ -49,8 +49,8 @@ Development version
 
 Check out the code from Github::
 
-    git clone https://github.com/vertcoin/electrum-vtc.git
-    cd electrum-vtc
+    git clone https://github.com/BTCP-community/electrum-zcl.git
+    cd electrum-zcl
 
 Run install (this should install dependencies)::
 
@@ -59,8 +59,8 @@ Run install (this should install dependencies)::
 Compile the icons and style files for VTC::
 
     sudo apt-get install pyqt4-dev-tools
-    pyrcc4 icons.qrc -o gui/vtc/icons_rc.py
-    pyrcc4 style.qrc -o gui/vtc/style_rc.py
+    pyrcc4 icons.qrc -o gui/zcl/icons_rc.py
+    pyrcc4 style.qrc -o gui/zcl/style_rc.py
 
 Compile the protobuf description file::
 
