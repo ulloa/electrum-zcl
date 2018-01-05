@@ -32,11 +32,11 @@ import threading
 import bitcoin
 from bitcoin import *
 
-import lyra2re_hash
-import lyra2re2_hash
-import vtc_scrypt
+import lyra2re_hash #
+import lyra2re2_hash #
+import vtc_scrypt #
 
-MAX_TARGET = 0x00000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+MAX_TARGET = 0x00000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF #
 
 def serialize_header(res):
     s = int_to_hex(res.get('version'), 4) \
@@ -47,7 +47,7 @@ def serialize_header(res):
         + int_to_hex(int(res.get('nonce')), 4)
     return s
 
-def deserialize_header(s, height):
+def deserialize_header(s, height): #fixme
     hex_to_int = lambda s: int('0x' + s[::-1].encode('hex'), 16)
     h = {}
     h['version'] = hex_to_int(s[0:4])

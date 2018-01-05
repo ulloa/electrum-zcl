@@ -1,3 +1,5 @@
+#implement this ?  https://github.com/str4d/zcash-pow
+
 #!/usr/bin/env python
 #
 # scrypt.py - basic implementation of Litecoin's proof-of-work algorithm

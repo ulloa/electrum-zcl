@@ -10,7 +10,7 @@ Under Active Development - DO NOT RECEIVE MONEY. GEN'D ADDRESSES ARE STILL VTC.
   Port Maintainer: Pooler (Electrum-LTC)
   Port Maintainer: Vertcoin (Electrum-VTC)
   Language: Python
-  Homepage: https://vertcoin.org
+  Homepage: ####################
 
 
 
@@ -29,7 +29,7 @@ Electrum from its root directory, without installing it on your
 system; all the python dependencies are included in the 'packages'
 directory. To run Electrum from its root directory, just do::
 
-    ./electrum-vtc
+    ./electrum-zcl
 
 You can also install Electrum on your system, by running this command::
 
@@ -65,8 +65,8 @@ Install Dependencies ::
 
   sudo pip2 install https://github.com/metalicjames/lyra2re-hash-python/archive/master.zip
 
-  pyrcc4 icons.qrc -o gui/vtc/icons_rc.py
-  pyrcc4 style.qrc -o gui/vtc/style_rc.py
+  pyrcc4 icons.qrc -o gui/zcl/icons_rc.py
+  pyrcc4 style.qrc -o gui/zcl/style_rc.py
 
   ./electrum-zcl
 

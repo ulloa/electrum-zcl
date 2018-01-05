@@ -35,61 +35,42 @@ from util import print_error, InvalidPassword
 
 import ecdsa
 import pyaes
+'''     
+        
+        // guarantees the first 2 characters, when base58 encoded, are "t1"
+        base58Prefixes[PUBKEY_ADDRESS]     = {0x1C,0xB8};
+        // guarantees the first 2 characters, when base58 encoded, are "t3"
+        base58Prefixes[SCRIPT_ADDRESS]     = {0x1C,0xBD};
+        // the first character, when base58 encoded, is "5" or "K" or "L" (as in Bitcoin)
+        base58Prefixes[SECRET_KEY]         = {0x80};
+        // do not rely on these BIP32 prefixes; they are not specified and may change
+        base58Prefixes[EXT_PUBLIC_KEY]     = {0x04,0x88,0xB2,0x1E};
+        base58Prefixes[EXT_SECRET_KEY]     = {0x04,0x88,0xAD,0xE4};
+        // guarantees the first 2 characters, when base58 encoded, are "zc"
+        base58Prefixes[ZCPAYMENT_ADDRRESS] = {0x16,0x9A};
+        // guarantees the first 2 characters, when base58 encoded, are "SK"
+        base58Prefixes[ZCSPENDING_KEY]     = {0xAB,0x36};'''
 
-# Vertcoin network constants
+
+
+# zcl network constants
 TESTNET = False
 NOLNET = False
-ADDRTYPE_P2PKH = 71
-ADDRTYPE_P2SH = 05
-ADDRTYPE_P2SH_ALT = 63
-ADDRTYPE_P2WPKH = 128
+ADDRTYPE_P2PKH = 1CB8 #hex fixme
+ADDRTYPE_P2SH = 1CBD #hex fixme
+#ADDRTYPE_P2SH_ALT = 63
+#ADDRTYPE_P2WPKH = 128
 ADDRTYPE_SECRET = 128
 XPRV_HEADER = 0x0488ade4
 XPUB_HEADER = 0x0488b21e
 #XPRV_HEADER_ALT = 0x019d9cfe
 #XPUB_HEADER_ALT = 0x019da462
-HEADERS_URL = "https://vtconline.org/blockchain_headers"
-GENESIS = "4d96a915f49d40b1e5c2844d1ee2dccb90013a990ccea12c492d22110489f0c4"
-
-'''
-def set_testnet():
-    #ADDRTYPE_P2SH_ALT
-    global ADDRTYPE_P2PKH, ADDRTYPE_P2SH, ADDRTYPE_P2WPKH
-    #XPRV_HEADER_ALT, XPUB_HEADER_ALT
-    global XPRV_HEADER, XPUB_HEADER
-    global TESTNET, HEADERS_URL
-    global GENESIS
-    TESTNET = True
-    ADDRTYPE_P2PKH = 111
-    ADDRTYPE_P2SH = 58
-    ADDRTYPE_P2SH_ALT = 196
-    ADDRTYPE_P2WPKH = 3
-    XPRV_HEADER = 0x04358394
-    XPUB_HEADER = 0x043587cf
-    XPRV_HEADER_ALT = 0x0436ef7d
-    XPUB_HEADER_ALT = 0x0436f6e1
-    HEADERS_URL = "https://electrum-ltc.org/testnet_headers"
-    GENESIS = "4966625a4b2851d9fdee139e56211a0d88575f59ed816ff5e6a63deb4e3e29a0"
-'''
-
-def set_nolnet():
-    global ADDRTYPE_P2PKH, ADDRTYPE_P2SH, ADDRTYPE_P2WPKH
-    global XPRV_HEADER, XPUB_HEADER
-    global NOLNET, HEADERS_URL
-    global GENESIS
-    TESTNET = True
-    ADDRTYPE_P2PKH = 0
-    ADDRTYPE_P2SH = 5
-    ADDRTYPE_P2WPKH = 6
-    XPRV_HEADER = 0x0488ade4
-    XPUB_HEADER = 0x0488b21e
-    HEADERS_URL = "https://headers.electrum.org/nolnet_headers"
-    GENESIS = "663c88be18d07c45f87f910b93a1a71ed9ef1946cad50eb6a6f3af4c424625c6"
+#HEADERS_URL = "https://vtconline.org/blockchain_headers"
+HEADERS_URL = "http://35.224.186.7" #http://35.224.186.7/headers00 exp fixme
+GENESIS = "0007104ccda289427919efc39dc9e4d499804b7bebc22df55f8b834301260602"
 
 
-
-################################## transactions
-
+#fees
 DUST_SOFT_LIMIT = 100000
 MIN_RELAY_TX_FEE = 100000
 FEE_STEP = 100000
