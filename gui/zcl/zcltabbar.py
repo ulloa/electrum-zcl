@@ -8,12 +8,11 @@ class ZclTabBar(QTabBar):
         self.tabSize = QSize(120, 120)
 
         self.borderColor = QColor(165, 162, 170)
-        self.backgroundColor = QColor(30, 24, 43)
-        self.firstTabColor = QColor(111, 170, 93)
+        self.backgroundColor = QColor(189, 107, 60)
+        self.firstTabColor = QColor(200, 200, 200)
         self.textColor = self.borderColor
         self.highlightTextColor = Qt.white
-        self.highlightColor = QColor(148, 202, 67)
-
+        self.highlightColor = QColor(148, 102, 67)
     def tabSizeHint(self, index):
         return self.tabSize
 
