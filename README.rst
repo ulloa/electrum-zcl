@@ -58,7 +58,7 @@ Install Dependencies, mainly PyQT4 ::
   brew install qt pyqt sip qscintilla2 
   brew install cartr/qt4/pyqt  
 
-  sudo apt-get install pyqt4-dev-tools
+  (sudo apt-get install pyqt4-dev-tools on linux)
 
   mkdir -p ~/Library/Python/2.7/lib/python/site-packages
 

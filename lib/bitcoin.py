@@ -35,29 +35,30 @@ from util import print_error, InvalidPassword
 
 import ecdsa
 import pyaes
-'''     
-        
-        // guarantees the first 2 characters, when base58 encoded, are "t1"
-        base58Prefixes[PUBKEY_ADDRESS]     = {0x1C,0xB8};
-        // guarantees the first 2 characters, when base58 encoded, are "t3"
-        base58Prefixes[SCRIPT_ADDRESS]     = {0x1C,0xBD};
-        // the first character, when base58 encoded, is "5" or "K" or "L" (as in Bitcoin)
-        base58Prefixes[SECRET_KEY]         = {0x80};
-        // do not rely on these BIP32 prefixes; they are not specified and may change
-        base58Prefixes[EXT_PUBLIC_KEY]     = {0x04,0x88,0xB2,0x1E};
-        base58Prefixes[EXT_SECRET_KEY]     = {0x04,0x88,0xAD,0xE4};
-        // guarantees the first 2 characters, when base58 encoded, are "zc"
-        base58Prefixes[ZCPAYMENT_ADDRRESS] = {0x16,0x9A};
-        // guarantees the first 2 characters, when base58 encoded, are "SK"
-        base58Prefixes[ZCSPENDING_KEY]     = {0xAB,0x36};'''
+
+''' ZCLASSIC:
+    // guarantees the first 2 characters, when base58 encoded, are "t1"
+    base58Prefixes[PUBKEY_ADDRESS]     = {0x1C,0xB8};
+    // guarantees the first 2 characters, when base58 encoded, are "t3"
+    base58Prefixes[SCRIPT_ADDRESS]     = {0x1C,0xBD};
+    // the first character, when base58 encoded, is "5" or "K" or "L" (as in Bitcoin)
+    base58Prefixes[SECRET_KEY]         = {0x80};
+    // do not rely on these BIP32 prefixes; they are not specified and may change
+    base58Prefixes[EXT_PUBLIC_KEY]     = {0x04,0x88,0xB2,0x1E};
+    base58Prefixes[EXT_SECRET_KEY]     = {0x04,0x88,0xAD,0xE4};
+    // guarantees the first 2 characters, when base58 encoded, are "zc"
+    base58Prefixes[ZCPAYMENT_ADDRRESS] = {0x16,0x9A};
+    // guarantees the first 2 characters, when base58 encoded, are "SK"
+    base58Prefixes[ZCSPENDING_KEY]     = {0xAB,0x36};
+'''
 
 
 
 # ZClassic network constants
 TESTNET = False
 NOLNET = False
-ADDRTYPE_P2PKH = 1CB8 #hex fixme
-ADDRTYPE_P2SH = 1CBD #hex fixme
+ADDRTYPE_P2PKH = b'\x1C\xB8' #TODO UNTESTED
+ADDRTYPE_P2SH = b'\x1C\xBD' #TODO UNTESTED
 #ADDRTYPE_P2SH_ALT = 63
 #ADDRTYPE_P2WPKH = 128
 ADDRTYPE_SECRET = 128
@@ -66,7 +67,7 @@ XPUB_HEADER = 0x0488b21e
 #XPRV_HEADER_ALT = 0x019d9cfe
 #XPUB_HEADER_ALT = 0x019da462
 #HEADERS_URL = "https://vtconline.org/blockchain_headers"
-HEADERS_URL = "http://35.224.186.7" #http://35.224.186.7/headers00 exp fixme
+HEADERS_URL = "http://35.224.186.7" #http://35.224.186.7/headers00 exp TODO
 GENESIS = "0007104ccda289427919efc39dc9e4d499804b7bebc22df55f8b834301260602"
 
 

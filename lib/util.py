@@ -346,7 +346,7 @@ def time_difference(distance_in_time, include_seconds):
 mainnet_block_explorers = {
     'bchain.info': ('https://bchain.info/ZCL',
                         {'tx': 'tx', 'addr': 'addr'}),
-    'explorer.zclassic.org': ('http://explorer.zclmine.pro',
+    'zclassicexplorer.org': ('http://zclassicexplorer.org',
                         {'tx': 'tx', 'addr': 'address'}),
 }
 
@@ -362,7 +362,7 @@ def block_explorer_info():
     return testnet_block_explorers if bitcoin.TESTNET else mainnet_block_explorers
 
 def block_explorer(config):
-    return config.get('block_explorer', 'bchain.info')
+    return config.get('block_explorer', 'zclassicexplorer.org')
 
 def block_explorer_tuple(config):
     return block_explorer_info().get(block_explorer(config))
