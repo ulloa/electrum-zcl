@@ -189,7 +189,7 @@ def init_daemon(config_options):
     storage = WalletStorage(config.get_wallet_path())
     if not storage.file_exists():
         print_msg("Error: Wallet file not found.")
-        print_msg("Type 'electrum-vtc create' to create a new wallet, or provide a path to a wallet with the -w option")
+        print_msg("Type 'electrum-zcl create' to create a new wallet, or provide a path to a wallet with the -w option")
         sys.exit(0)
     if storage.is_encrypted():
         if config.get('password'):
@@ -224,7 +224,7 @@ def init_cmdline(config_options, server):
 
     if cmd.requires_wallet and not storage.file_exists():
         print_msg("Error: Wallet file not found.")
-        print_msg("Type 'electrum-vtc create' to create a new wallet, or provide a path to a wallet with the -w option")
+        print_msg("Type 'electrum-zcl create' to create a new wallet, or provide a path to a wallet with the -w option")
         sys.exit(0)
 
     # important warning
@@ -338,7 +338,7 @@ if __name__ == '__main__':
     config_options['cwd'] = os.getcwd()
 
     if config_options.get('portable'):
-        config_options['electrum_path'] = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'electrum-vtc_data')
+        config_options['electrum_path'] = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'electrum-zcl_data')
 
     # kivy sometimes freezes when we write to sys.stderr
     set_verbosity(config_options.get('verbose') and config_options.get('gui')!='kivy')
@@ -346,7 +346,7 @@ if __name__ == '__main__':
     # check uri
     uri = config_options.get('url')
     if uri:
-        if not uri.startswith('vertcoin:'):
+        if not uri.startswith('zclassic:'):
             print_stderr('unknown command:', uri)
             sys.exit(1)
         config_options['url'] = uri
@@ -371,7 +371,7 @@ if __name__ == '__main__':
     if cmdname == 'gui':
         fd, server = daemon.get_fd_or_server(config)
         if fd is not None:
-            plugins = init_plugins(config, config.get('gui', 'vtc'))
+            plugins = init_plugins(config, config.get('gui', 'zcl'))
             d = daemon.Daemon(config, fd)
             d.start()
             d.init_gui(config, plugins)
@@ -420,7 +420,7 @@ if __name__ == '__main__':
         else:
             cmd = known_commands[cmdname]
             if cmd.requires_network:
-                print_msg("Daemon not running; try 'electrum-vtc daemon start'")
+                print_msg("Daemon not running; try 'electrum-zcl daemon start'")
                 sys.exit(1)
             else:
                 init_plugins(config, 'cmdline')
