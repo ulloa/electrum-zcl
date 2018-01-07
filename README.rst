@@ -19,11 +19,7 @@ Under Active Development - DO NOT RECEIVE MONEY. GEN'D ADDRESSES ARE STILL VTC.
 Getting started
 ===============
 
-Electrum is a pure python application. If you want to use the
-Qt interface, install the Qt dependencies::
-
-    sudo apt-get install python-qt4
-    sudo pip2 install https://github.com/metalicjames/lyra2re-hash-python/archive/master.zip
+Electrum is a pure python application.
 
 If you downloaded the official package (tar.gz), you can run
 Electrum from its root directory, without installing it on your
@@ -45,68 +41,6 @@ Version".
 
 
 
-
-On Mac
-===============
-Install Homebrew ::
-
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)")
-
-
-Install Dependencies, mainly PyQT4 ::
-
-  brew install qt pyqt sip qscintilla2 
-  brew install cartr/qt4/pyqt  
-
-  (sudo apt-get install pyqt4-dev-tools on linux)
-
-  mkdir -p ~/Library/Python/2.7/lib/python/site-packages
-
-Check out the code from Github::
-
-  git clone https://github.com/BTCP-community/electrum-zcl.git
-  cd electrum-zcl
-
-Run install (this should install dependencies)::
-
-  python setup.py install
-
-Compile the icons and style files for ZCL::
-
-    ARCHFLAGS="-arch i386 -arch x86_64"
-
-    echo 'import site; site.addsitedir("/usr/local/lib/python2.7/site-packages")' >> ~/Library/Python/2.7/lib/python/site-packages/homebrew.pth
-
-    sudo pip2 install dnspython pyaes ecdsa requests six qrcode pbkdf2 google protobuf jsonrpclib PySocks vtc_scrypt blockchain
-
-    sudo pip2 install https://github.com/metalicjames/lyra2re-hash-python/archive/master.zip
-
-    pyrcc4 icons.qrc -o gui/zcl/icons_rc.py
-    pyrcc4 style.qrc -o gui/zcl/style_rc.py
-
-And run:: 
- 
- ./electrum-zcl
-
-
-
-You can also try:::
-
-   On MacPorts installs: 
-    sudo python setup-release.py py2app
-
-Or::::
-
-   On Homebrew installs: 
-    ARCHFLAGS="-arch i386 -arch x86_64"
-    sudo python setup-release.py py2app --includes sip
-    
-    sudo hdiutil create -fs HFS+ -volname "Electrum-ZCL" -srcfolder dist/Electrum-ZCL.app dist/electrum-zcl-VERSION-macosx.dmg
-   
-
-
-old VTC instructions:
-
 Development version
 ===================
 
@@ -116,13 +50,20 @@ Check out the code from Github::
     git clone https://github.com/BTCP-community/electrum-zcl.git
     cd electrum-zcl
 
-Run install (this should install dependencies)::
+Grab setup dependencies::
+
+    sudo apt-get install python-qt4 python-setuptools python-dev build-essential    sudo easy_install pip
+    sudo pip2 install https://github.com/metalicjames/lyra2re-hash-python/archive/master.zip
+
+Run install (this should install dependencies, you may need sudo)::
 
     python setup.py install
 
 Compile the icons and style files for VTC::
 
+    ARCHFLAGS="-arch i386 -arch x86_64"
     sudo apt-get install pyqt4-dev-tools
+
     pyrcc4 icons.qrc -o gui/zcl/icons_rc.py
     pyrcc4 style.qrc -o gui/zcl/style_rc.py
 
@@ -136,6 +77,39 @@ Create translations (optional)::
     sudo apt-get install python-pycurl gettext
     ./contrib/make_locale
 
+And then run!::
+
+    ./electrum-zcl
+
+
+On Mac
+===============
+Install Homebrew ::
+
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)")
+
+
+If on a Mac and some dependencies fail (PyQT4), you can also try:::
+  brew install qt pyqt sip qscintilla2 
+  brew install cartr/qt4/pyqt  
+
+
+  mkdir -p ~/Library/Python/2.7/lib/python/site-packages
+
+    echo 'import site; site.addsitedir("/usr/local/lib/python2.7/site-packages")' >> ~/Library/Python/2.7/lib/python/site-packages/homebrew.pth
+
+
+    sudo pip2 install dnspython pyaes ecdsa requests six qrcode pbkdf2 google protobuf jsonrpclib PySocks vtc_scrypt blockchain
+
+    sudo pip2 install https://github.com/metalicjames/lyra2re-hash-python/archive/master.zip
+
+    echo 'import site; site.addsitedir("/usr/local/lib/python2.7/site-packages")' >> ~/Library/Python/2.7/lib/python/site-packages/homebrew.pth
+
+    sudo pip2 install dnspython pyaes ecdsa requests six qrcode pbkdf2 google protobuf jsonrpclib PySocks vtc_scrypt blockchain
+
+    sudo pip2 install https://github.com/metalicjames/lyra2re-hash-python/archive/master.zip
+
+   
 
 Creating Binaries
 =================
