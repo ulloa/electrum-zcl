@@ -4,53 +4,44 @@
 PYTHON_URL=https://www.python.org/ftp/python/2.7.13/python-2.7.13.msi
 PYQT4_URL=http://sourceforge.net/projects/pyqt/files/PyQt4/PyQt-4.11.1/PyQt4-4.11.1-gpl-Py2.7-Qt4.8.6-x32.exe
 PYWIN32_URL=http://sourceforge.net/projects/pywin32/files/pywin32/Build%20219/pywin32-219.win32-py2.7.exe/download
-PYINSTALLER_URL=https://pypi.python.org/packages/source/P/PyInstaller/PyInstaller-2.1.zip
+#PYINSTALLER_URL=https://pypi.python.org/packages/source/P/PyInstaller/PyInstaller-2.1.zip
 NSIS_URL=http://prdownloads.sourceforge.net/nsis/nsis-2.46-setup.exe?download
 SETUPTOOLS_URL=https://pypi.python.org/packages/2.7/s/setuptools/setuptools-0.6c11.win32-py2.7.exe
 LYRA2RE_HASH_PYTHON_URL=https://github.com/metalicjames/lyra2re-hash-python/archive/master.zip
+## Added
+MINGW_GET=http://downloads.sourceforge.net/project/mingw/Installer/mingw-get-setup.exe
 
 
-## These settings probably don't need change
-export WINEPREFIX=/opt/wine64
-#export WINEARCH='win32'
-
-PYHOME=c:/python27
-PYTHON="wine $PYHOME/python.exe -OO -B"
+PYHOME=/c/Python27
 
 # Let's begin!
-cd `dirname $0`
-set -e
+cd ~/AppData/Local/Temp
 
-# Clean up Wine environment
-echo "Cleaning $WINEPREFIX"
-rm -rf $WINEPREFIX
+# Removing previous zcl
+echo "creating zcl dir"
+rm -rf zcl
+mkdir zcl
 echo "done"
-
-wine 'wineboot'
-
-echo "Cleaning tmp"
-rm -rf tmp
-mkdir -p tmp
-echo "done"
-
-cd tmp
+cd zcl
 
 # Install Python
-wget -O python.msi "$PYTHON_URL"
-wine msiexec /q /i python.msi
+curl -o python.msi "$PYTHON_URL"
+### wget -O python.msi "$PYTHON_URL"
+msiexec -q -i python.msi
 
 # Install PyWin32
-wget -O pywin32.exe "$PYWIN32_URL"
-wine pywin32.exe
+curl -L -o pywin32.exe "$PYWIN32_URL"
+### wget -O pywin32.exe "$PYWIN32_URL"
+./pywin32.exe
 
 # Install PyQt4
-wget -O PyQt.exe "$PYQT4_URL"
-wine PyQt.exe
+curl -L -o PyQt.exe "$PYQT4_URL"
+### wget -O PyQt.exe "$PYQT4_URL"
+./PyQt.exe
 
-# Install pyinstaller
-wget -O pyinstaller.zip "$PYINSTALLER_URL"
-unzip pyinstaller.zip
-mv PyInstaller-2.1 $WINEPREFIX/drive_c/pyinstaller
+echo 'export PATH="$PATH:/c/Python27"' > ~/.bashrc
+export PATH="$PATH:/c/Python27"
+$PYTHON=$PYHOME/python.exe
 
 # Install ZBar
 #wget -q -O zbar.exe "http://sourceforge.net/projects/zbar/files/zbar/0.10/zbar-0.10-setup.exe/download"
@@ -71,32 +62,36 @@ $PYTHON -m pip install websocket-client
 #wine setuptools.exe
 
 # Install NSIS installer
-wget -q -O nsis.exe "$NSIS_URL"
-wine nsis.exe
+curl -L -o nsis.exe "$NSIS_URL"
+### wget -q -O nsis.exe "$NSIS_URL"
+./nsis.exe
 
 # Install UPX
 #wget -O upx.zip "http://upx.sourceforge.net/download/upx308w.zip"
 #unzip -o upx.zip
 #cp upx*/upx.exe .
 
-# add dlls needed for pyinstaller:
-cp $WINEPREFIX/drive_c/windows/system32/msvcp90.dll $WINEPREFIX/drive_c/Python27/
-cp $WINEPREFIX/drive_c/windows/system32/msvcm90.dll $WINEPREFIX/drive_c/Python27/
+# add dlls needed for pyinstaller, not using, pray it autofinds:
+## cp $WINEPREFIX/drive_c/windows/system32/msvcp90.dll $WINEPREFIX/drive_c/Python27/
+## cp $WINEPREFIX/drive_c/windows/system32/msvcm90.dll $WINEPREFIX/drive_c/Python27/
 
 
 # Install MinGW
-wget http://downloads.sourceforge.net/project/mingw/Installer/mingw-get-setup.exe
-wine mingw-get-setup.exe
+curl -L -O $MINGW_GET
+### wget http://downloads.sourceforge.net/project/mingw/Installer/mingw-get-setup.exe
+./mingw-get-setup.exe
 
-echo "add c:\MinGW\bin to PATH using regedit"
-echo "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment"
-regedit
+echo "add c:\MinGW\bin to PATH using .bashrc"
+echo 'export PATH="$PATH:/c/MinGW/bin"' >> ~/.bashrc
+## echo "add c:\MinGW\bin to PATH using regedit"
+## echo "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment"
+## regedit
 
-wine mingw-get install gcc
-wine mingw-get install mingw-utils
-wine mingw-get install mingw32-libz
+mingw-get.exe install gcc
+mingw-get.exe install mingw-utils
+mingw-get.exe install mingw32-libz
 
-printf "[build]\ncompiler=mingw32\n" > $WINEPREFIX/drive_c/Python27/Lib/distutils/distutils.cfg
+printf "[build]\ncompiler=mingw32\n" > $PYHOME/Lib/distutils/distutils.cfg
 
 $PYTHON -m pip install vtc_scrypt
 $PYTHON -m pip install win_inet_pton
