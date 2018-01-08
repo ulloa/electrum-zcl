@@ -41,7 +41,7 @@ curl -L -o PyQt.exe "$PYQT4_URL"
 
 echo 'export PATH="$PATH:/c/Python27"' > ~/.bashrc
 export PATH="$PATH:/c/Python27"
-$PYTHON=$PYHOME/python.exe
+$PYTHON=/c/Python27/python.exe
 
 # Install ZBar
 #wget -q -O zbar.exe "http://sourceforge.net/projects/zbar/files/zbar/0.10/zbar-0.10-setup.exe/download"

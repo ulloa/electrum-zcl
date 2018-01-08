@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # You probably need to update only this link
-ELECTRUM_GIT_URL=https://github.com/BTCP-community/electrum-zcl.git
+## ELECTRUM_GIT_URL=https://github.com/BTCP-community/electrum-zcl.git
+ELECTRUM_GIT_URL=https://github.com/ulloa/electrum-zcl.git
 BRANCH=master
 NAME_ROOT=electrum-zcl
 
@@ -38,6 +39,10 @@ cp electrum-zcl-git/LICENCE .
 
 # add python packages (built with make_packages) RUN make_packages?
 ##cp -r ../../../packages $WINEPREFIX/drive_c/electrum-zcl/
+###### Copy requests package
+mkdir /c/electrum-zcl/packages
+cp -r /c/Python27/Lib/site-packages/pip/_vendor/requests /c/electrum-zcl/packages
+
 
 # add locale dir
 ##cp -r ../../../lib/locale $WINEPREFIX/drive_c/electrum-zcl/lib/
